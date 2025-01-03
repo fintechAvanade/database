@@ -1,29 +1,66 @@
+use DB_FINTECH
+go
+
+
 begin TRAN
 
-insert into tb_usuario VALUES ('josé da silva', '90778228010', '2003-08-20' , 'jose.silva@email.com', '1140028922', 'jose.silva', 'senha123@', '2025-01-02', 'c', 0);
-insert into tb_usuario VALUES ('maria de jesus', '12345678912', '2003-08-20' , 'maria.jesus@email.com', '1140028922', 'maria.jesus', 'senha123@', '2025-01-02', 'c', 0);
+go
+insert into tb_usuario VALUES 
+('peter paker', '69228182024', '1989-01-01' , 'peter@email.com', '1140028922', '', 'senha123@', '', 'c', 0), 
+('lois lane', '07781582098', '1952-04-01' , 'lois@email.com', '1140028922', '', 'senha123@', '', 'c', 0), 
+('clark kent', '00927129086', '1975-09-10' , 'clark@email.com', '1140028922', '', 'senha123@', '', 'c', 0), 
+('bruce wayne', '24482463000', '1996-12-30' , 'bruce@email.com', '1140028922', '', 'senha123@', '', 'c', 0),
+('cleiton da silva', '41394632010', '2000-11-30' , 'cleitinho@email.com', '1140028922', '', 'senha123@', '', 'c', 0);
 
-select * from tb_usuario
+select * from TB_USUARIO
 
-insert into TB_CONTA VALUES (1, '0001', '123456789-1', 0, '1234', 1);
-insert into TB_CONTA VALUES (1, '0001', '987654321-1', 0, '1234', 1);
+go
+insert into TB_CONTA VALUES 
+(8, '2123', '27307548-2', 0, '1234', 1),
+(9, '1220', '36506-8', 0, '1234', 1),
+(10, '0815', '135359-4', 0, '1234', 1),
+(11, '3367', '1298913-P', 0, '1234', 1),
+(12, '8883', '81233-4', 0, '1234', 1);
 
 select * from TB_CONTA
 
-insert into TB_TIPO_MOVIMENTACAO VALUES ('pix', 0);
+go 
+insert into TB_TIPO_CHAVE_PIX VALUES
+('cpf'),('telefone'),('email'),('chave aleatória')
 
-SELECT * from TB_TIPO_MOVIMENTACAO
+select * from TB_TIPO_CHAVE_PIX
 
-insert into TB_STATUS_MOVIMENTACAO VALUES ('realizado')
+go
+INSERT INTO TB_TIPO_MOVIMENTACAO (nome, percentual_taxa)
+VALUES ('Depósito em conta corrente', 0.5),
+       ('Saque em caixa eletrônico', 1.0),
+       ('Transferência entre contas', 0.3),
+       ('Pagamento de boleto', 0.2),
+       ('Débito automático', 0.1),
+       ('Compra com cartão de débito', 0.0),
+       ('Compra com cartão de crédito', 0.0),
+       ('Recebimento de salário', 0.0),
+       ('Pix', 0.0),
+       ('Pagamento de fatura de cartão de crédito', 0.15),
+       ('Investimento em poupança', 0.0);
+
+select * from TB_TIPO_MOVIMENTACAO
+
+go
+insert into TB_STATUS_MOVIMENTACAO VALUES ('pendente'),('erro'),('sucesso');
 
 select * from TB_STATUS_MOVIMENTACAO
 
-INSERT into TB_MOVIMENTACAO VALUES (1, 2, 1, '894946189498465156489166548964631668', getdate(), 10, null, 0, 10);
-INSERT into TB_MOVIMENTACAO VALUES (1, 1, 1, '0001 987654321-1', getdate(), 10, null, 0, 10);
+go
+INSERT into TB_MOVIMENTACAO VALUES 
+(3, 7, 4, '894946189498465156489166548964631668', getdate(), 100, null, 20, 120),
+(3, 6, 4, '1220 36506-8', getdate(), 100, null, 30, 130),
+(3, 12, 4, '00927129086', getdate(), 100, null, 0, 100);
 
-select * from TB_MOVIMENTACAO m join TB_TIPO_MOVIMENTACAO tm on m.ID_TIPO_MOVIMENTACAO = tm.ID
-
+select * from TB_MOVIMENTACAO
 
 commit;
 
 select * from TB_MOVIMENTACAO m join TB_TIPO_MOVIMENTACAO tm on m.ID_TIPO_MOVIMENTACAO = tm.ID join TB_CONTA c on m.DESTINO = c.AGENCIA + ' ' + c.NUMERO_CONTA
+
+select * from TB_USUARIO
