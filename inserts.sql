@@ -55,12 +55,13 @@ go
 INSERT into TB_MOVIMENTACAO VALUES 
 (3, 7, 4, '894946189498465156489166548964631668', getdate(), 100, null, 20, 120),
 (3, 6, 4, '1220 36506-8', getdate(), 100, null, 30, 130),
-(3, 12, 4, '00927129086', getdate(), 100, null, 0, 100);
+(3, 12, 4, '00927129086', getdate(), 100, null, 0, 100),
+(3, 12, 4, 'cleitinho@email', getdate(), 200, null, 0, 200);
 
 select * from TB_MOVIMENTACAO
 
 commit;
 
-select * from TB_MOVIMENTACAO m join TB_TIPO_MOVIMENTACAO tm on m.ID_TIPO_MOVIMENTACAO = tm.ID join TB_CONTA c on m.DESTINO = c.AGENCIA + ' ' + c.NUMERO_CONTA
+
 
 select * from TB_USUARIO
