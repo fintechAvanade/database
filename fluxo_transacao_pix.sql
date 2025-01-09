@@ -1,0 +1,36 @@
+USE DB_FINTECH
+GO
+
+SELECT * FROM TB_CHAVE_PIX
+
+--Transerencia da conta de id 2 para a 1
+
+--Buscando uma conta pela chave pix e juntando com suas infos com o join
+SELECT CP.TIPO_CHAVE_PIX,
+	   CP.VALOR_CHAVE_PIX,
+	   C.ID AS [ID CONTA],
+	   C.AGENCIA,
+	   C.NUMERO_CONTA,
+	   C.SALDO,
+	   C.ATIVO,
+	   C.TIPO_CONTA
+FROM TB_CHAVE_PIX CP INNER JOIN TB_CONTA C
+ON CP.ID_CONTA = C.ID
+WHERE VALOR_CHAVE_PIX = '69228182024'
+
+
+--Inserindo a transacao na tabela de movimentacao incluindo as duas partes, quem enviou e quem recebeu
+INSERT INTO TB_MOVIMENTACAO (ID_STATUS_MOVIMENTACAO, ID_CONTA, CODIGO_MOVIMENTACAO, TIPO_MOVIMENTACAO, DIRECAO, DATA_HORA, VALOR_MOVIMENTACAO, VALOR_PERCENTUAL_TAXA, VALOR_TOTAL) VALUES(2, 1, 525252,'PIX', 'C', GETDATE(), 100, 0, 100 )
+GO
+INSERT INTO TB_MOVIMENTACAO (ID_STATUS_MOVIMENTACAO, ID_CONTA, CODIGO_MOVIMENTACAO, TIPO_MOVIMENTACAO, DIRECAO, DATA_HORA, VALOR_MOVIMENTACAO, VALOR_PERCENTUAL_TAXA, VALOR_TOTAL) VALUES(2, 2, 525252,'PIX', 'D', GETDATE(), 100, 0, 100 )
+GO
+
+--atualizando aos saldos, agora que conseguimos o id da conta destino e temos o id da nossa conta com nosso token logado
+UPDATE TB_CONTA
+    SET SALDO = SALDO + 100
+    WHERE ID = 1;
+
+UPDATE TB_CONTA
+    SET SALDO = SALDO - 100
+    WHERE ID = 2;
+
