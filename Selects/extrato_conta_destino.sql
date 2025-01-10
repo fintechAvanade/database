@@ -3,10 +3,6 @@ DECLARE @CONTA_ORIGEM INT = 2
 SELECT 
         C.AGENCIA AS [Agência], 
         C.NUMERO_CONTA AS [Conta],
-        -- (SELECT U.NOME FROM TB_MOVIMENTACAO M 
-        -- INNER JOIN TB_CONTA C ON M.ID_CONTA = C.ID
-        -- INNER JOIN TB_USUARIO U ON C.ID_USUARIO = U.ID
-        -- WHERE M.DIRECAO = 'D') AS [De],
         M.CODIGO_MOVIMENTACAO AS [Código da Transação], 
         SM.NOME_STATUS AS [Status],
         M.TIPO_MOVIMENTACAO AS [Tipo da Movimentação],
