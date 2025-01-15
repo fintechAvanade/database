@@ -8,7 +8,7 @@ GO
 
 -- ADICIONAR DEPOSITO
 INSERT INTO TB_MOVIMENTACAO (
-    ID_STATUS_MOVIMENTACAO, 
+    STATUS_MOVIMENTACAO, 
     ID_CONTA, 
     TIPO_MOVIMENTACAO, 
     DIRECAO, 
@@ -19,18 +19,20 @@ INSERT INTO TB_MOVIMENTACAO (
     VALOR_TOTAL, 
     CODIGO_MOVIMENTACAO
     ) VALUES
-(1, 1, 'Deposito', 'D', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
-(1, 2, 'Deposito', 'D', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
-(1, 3, 'Deposito', 'D', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
-(1, 4, 'Deposito', 'D', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
-(1, 5, 'Deposito', 'D', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
-(1, 6, 'Deposito', 'D', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
-(1, 7, 'Deposito', 'D', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
-(1, 8, 'Deposito', 'D', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
-(1, 9, 'Deposito', 'D', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
-(1, 10, 'Deposito', 'D', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID());
+('SUCESSO', 1, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 2, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 3, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 4, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 5, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 6, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 7, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 8, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 9, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 10, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID());
 
 GO
+
+
 
 -- ATUALIZAR SALDO DAS CONTAS
 
@@ -55,7 +57,7 @@ WHERE VALOR_CHAVE_PIX = '69228182024'
 -- Fazer pix entre contas
 
 INSERT INTO TB_MOVIMENTACAO (
-    ID_STATUS_MOVIMENTACAO, 
+    STATUS_MOVIMENTACAO, 
     ID_CONTA, 
     TIPO_MOVIMENTACAO, 
     DIRECAO, 
@@ -66,8 +68,8 @@ INSERT INTO TB_MOVIMENTACAO (
     VALOR_TOTAL, 
     CODIGO_MOVIMENTACAO
     ) VALUES
-(3, 1, 'Pix', 'C', GETDATE(), 'Transferencia pix - barzin sexta', 50, 0, 50, 'bb217d4a-01a8-43a7-8507-fc9b07f0d3a9'),
-(3, 2, 'Pix', 'D', GETDATE(), 'Transferencia pix - barzin sexta', 50, 0, 50, 'bb217d4a-01a8-43a7-8507-fc9b07f0d3a9');
+('PENDENTE', 1, 'Pix', 'CREDITO', GETDATE(), 'Transferencia pix - barzin sexta', 50, 0, 50, 'bb217d4a-01a8-43a7-8507-fc9b07f0d3a9'),
+('PENDENTE', 2, 'Pix', 'DEBITO', GETDATE(), 'Transferencia pix - barzin sexta', 50, 0, 50, 'bb217d4a-01a8-43a7-8507-fc9b07f0d3a9');
 
 GO
 
@@ -82,13 +84,13 @@ SELECT * FROM TB_MOVIMENTACAO WHERE CODIGO_MOVIMENTACAO = 'bb217d4a-01a8-43a7-85
 
 GO
 
-UPDATE TB_MOVIMENTACAO SET ID_STATUS_MOVIMENTACAO = 1 WHERE CODIGO_MOVIMENTACAO = 'bb217d4a-01a8-43a7-8507-fc9b07f0d3a9';
+UPDATE TB_MOVIMENTACAO SET STATUS_MOVIMENTACAO = 'SUCESSO' WHERE CODIGO_MOVIMENTACAO = 'bb217d4a-01a8-43a7-8507-fc9b07f0d3a9';
 
 GO
 
 
 
-COMMIT;
+
 
 
 --MOSTRAR EXTRATO
@@ -107,10 +109,10 @@ SELECT
         INNER JOIN TB_USUARIO U ON C.ID_USUARIO = U.ID
         WHERE M.DIRECAO = 'D' AND M.CODIGO_MOVIMENTACAO = @CODIGO_MOVIMENTACAO ) AS [Para],
         M.CODIGO_MOVIMENTACAO AS [Código da Transação], 
-        SM.NOME_STATUS AS [Status],
+        M.STATUS_MOVIMENTACAO AS [Status],
         M.TIPO_MOVIMENTACAO AS [Tipo da Movimentação],
         CASE 
-            WHEN M.DIRECAO = 'D' THEN 'Entrada' 
+            WHEN M.DIRECAO = 'DEBITO' THEN 'Entrada' 
             ELSE 'Saída' 
         END AS [Direção],
         M.DATA_HORA AS [Data],
@@ -121,8 +123,7 @@ SELECT
         C.SALDO AS [Saldo Atual]
     FROM TB_MOVIMENTACAO M
     INNER JOIN TB_CONTA C ON M.ID_CONTA = C.ID
-    INNER JOIN TB_STATUS_MOVIMENTACAO SM ON M.ID_STATUS_MOVIMENTACAO = SM.ID
-    WHERE M.DIRECAO = 'C' AND M.ID_CONTA = @CONTA_ORIGEM
+    WHERE M.DIRECAO = 'CREDITO' AND M.ID_CONTA = @CONTA_ORIGEM
 
 
 -- Extrato conta de destino
@@ -134,10 +135,10 @@ SELECT
         INNER JOIN TB_USUARIO U ON C.ID_USUARIO = U.ID
         WHERE M.DIRECAO = 'C' AND M.CODIGO_MOVIMENTACAO = @CODIGO_MOVIMENTACAO) AS [De],
         M.CODIGO_MOVIMENTACAO AS [Código da Transação], 
-        SM.NOME_STATUS AS [Status],
+        M.STATUS_MOVIMENTACAO AS [Status],
         M.TIPO_MOVIMENTACAO AS [Tipo da Movimentação],
         CASE 
-            WHEN M.DIRECAO = 'D' THEN 'Entrada' 
+            WHEN M.DIRECAO = 'DEBITO' THEN 'Entrada' 
             ELSE 'Saída' 
         END AS [Direção],
         M.DATA_HORA AS [Data],
@@ -148,8 +149,7 @@ SELECT
         C.SALDO AS [Saldo Atual]
     FROM TB_MOVIMENTACAO M
     INNER JOIN TB_CONTA C ON M.ID_CONTA = C.ID
-    INNER JOIN TB_STATUS_MOVIMENTACAO SM ON M.ID_STATUS_MOVIMENTACAO = SM.ID
-    WHERE M.DIRECAO = 'D' AND M.ID_CONTA = @CONTA_DESTINO AND M.TIPO_MOVIMENTACAO = 'Pix'
+    WHERE M.DIRECAO = 'DEBITO' AND M.ID_CONTA = @CONTA_DESTINO AND M.TIPO_MOVIMENTACAO = 'Pix'
 
 
 

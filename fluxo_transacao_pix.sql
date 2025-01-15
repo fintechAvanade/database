@@ -34,3 +34,9 @@ UPDATE TB_CONTA
     SET SALDO = SALDO - 100
     WHERE ID = 2;
 
+
+--Vizualizar o extrato da conta, filtrando pelo id
+SELECT * FROM TB_MOVIMENTACAO WHERE ID_CONTA = 2
+
+
+SELECT * FROM TB_CONTA WHERE ID = 2 OR ID = 1
