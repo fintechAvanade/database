@@ -139,7 +139,157 @@ CREATE TABLE TB_CONTA_INVESTIMENTO(
 )
 GO
 
+--SELECT * FROM TB_ENDERECO;
+
+INSERT INTO TB_ENDERECO (CEP, CIDADE, BAIRRO, LOGRADOURO, ESTADO, NUMERO, COMPLEMENTO) 
+VALUES
+	('50711150','Recife', 'Cordeiro', 'Rua Major Quinteiro', 'PE', '82', 'Apto 105'),
+	('50010000', 'Recife', 'Bairro do Recife', 'Rua Primeiro de Março', 'PE', '123', 'Apto 101'),
+	('01001000', 'São Paulo', 'Sé', 'Praça da Sé', 'SP', 789, NULL),
+	('20040000', 'Rio de Janeiro', 'Centro', 'Av. Rio Branco', 'RJ', 101, 'Cobertura'),
+	('70040000', 'Brasília', 'Asa Sul', 'SQS 308', 'DF', 202, 'Bloco B, Apto 302'),
+	('40130000', 'Salvador', 'Barra', 'Av. Sete de Setembro', 'BA', 303, 'Loja 3'),
+	('80010000', 'Curitiba', 'Centro', 'Rua XV de Novembro', 'PR', 404, 'Sala 404'),
+	('88010000', 'Florianópolis', 'Centro', 'Rua Felipe Schmidt', 'SC', 505, 'Apto 502'),
+	('69010000', 'Manaus', 'Centro', 'Rua Eduardo Ribeiro', 'AM', 606, NULL),
+	('69010001', 'Manaus', 'Centro', 'Rua Eduardo Ribeiro', 'AM', 659, NULL);
+GO
+
+--SELECT * FROM TB_USUARIO;
+INSERT INTO TB_USUARIO (
+	ID_ENDERECO,
+	NOME, 
+	CPF, 
+	DATA_NASCIMENTO, 
+	EMAIL, 
+	TELEFONE, 
+	USUARIO, 
+	HASH_SENHA, 
+	DATA_ULTIMO_ACESSO, 
+	TIPO_USUARIO, 
+	NUMERO_TENTATIVAS_ACESSO
+) VALUES
+(1,'João Silva', '12345678901', '1985-05-15', 'joao.silva@example.com', '11987654321', 'joaosilva', 'ef92b778bafe771e89245b89ecbc9a4c41c8bde1e9c3e1e4b648f15f7f52f8f0', '2025-01-01', 'CLIENTE', 0),
+(2,'Maria Oliveira', '23456789012', '1990-08-22', 'maria.oliveira@example.com', '21987654321', 'mariaoliveira', '73475cb40a568e8da8a03ef3b41e9b6c8a81b6f9b2f3b2a57f4f598c4a04daaa', '2025-01-02', 'ADMIN', 1),
+(3,'Carlos Souza', '34567890123', '1978-12-05', 'carlos.souza@example.com', '31987654321', 'carlossouza', 'b63fb509baeb7a6b9dfb20f6f5b6f3af033705d0a09f7dbefc42365db4a27b2f', '2025-01-03', 'CLIENTE', 2),
+(4,'Ana Pereira', '45678901234', '1982-03-18', 'ana.pereira@example.com', '41987654321', 'anapereira', 'c90f3c0660c8b45b5a14a0412f6c1c9834cb332f9e94f86f0b7b5699c25c1f0d', '2025-01-04', 'ADMIN', 0),
+(5,'Pedro Lima', '56789012345', '1995-07-30', 'pedro.lima@example.com', '51987654321', 'pedrolima', '5e884898da28047151d0e56f8dc6292773603d0d6aabbddc839dcde984c5e813', '2025-01-05', 'CLIENTE', 1),
+(6,'Fernanda Costa', '67890123456', '1988-11-11', 'fernanda.costa@example.com', '61987654321', 'fernandacosta', 'f7c3bc1d808e04732adf679965ccc34ca7ae3441abf6f836993b373516e6a882', '2025-01-06', 'ADMIN', 2),
+(7,'Rafael Almeida', '78901234567', '1992-02-25', 'rafael.almeida@example.com', '71987654321', 'rafaelalmeida', 'e99a18c428cb38d5f260853678922e03abd833647f6f1706e7a91b90a5f76fc0', '2025-01-07', 'CLIENTE', 0),
+(8,'Juliana Santos', '89012345678', '1980-06-14', 'juliana.santos@example.com', '81987654321', 'julianasantos', '6d0f6ebf0c0b4ca35b74a2f8fa4bd25b9f7d6863b4ef714cf1fdd214d7f4a2f3', '2025-01-08', 'ADMIN', 1),
+(9,'Bruno Rocha', '90123456789', '1987-09-09', 'bruno.rocha@example.com', '91987654321', 'brunorocha', 'b15f17eb8a9cc4e3bc226a54954c00ad65d8007bc9735d34f0668c23178e5d9c', '2025-01-09', 'CLIENTE', 2),
+(10,'Bruno Anderson', '90123456712', '1987-09-09', 'bruno.anderson@example.com', '91987654398', 'brunoanderson', 'b15f17eb8a9cc4e3bc226a54954c00ad65d8007bc9735d34f0668c2317d9g6f5', '2025-01-09', 'CLIENTE', 2)
+GO
+
+--SELECT * FROM TB_CONTA
+
+INSERT INTO TB_CONTA (ID_USUARIO, AGENCIA, NUMERO_CONTA, SALDO, HASH_SENHA_PAGAMENTO, ATIVO, TIPO_CONTA) VALUES
+(1, '0001', '1234567890', 1000.00, '8d969eef6ecad3c29a3a629280e686cf', 1, 'SIMPLES'),
+(2, '0002', '2345678901', 1500.00, 'a2347f3b0a3702086b69e3f1d9d1d6ff', 1, 'SIMPLES'),
+(3, '0003', '3456789012', 2000.00, 'c1744d5f91fc3c3cd18a743e92f894fd', 1, 'SIMPLES'),
+(4, '0004', '4567890123', 2500.00, 'e10adc3949ba59abbe56e057f20f883e', 1, 'SIMPLES'),
+(5, '0005', '5678901234', 3000.00, 'e6cc6b9a7d9d3fdb92fcbb4b4b7ebc78', 1, 'SIMPLES'),
+(6, '0006', '6789012345', 3500.00, '5e884898da28047151d0e56f8dc62927', 1, 'SIMPLES'),
+(7, '0007', '7890123456', 4000.00, 'a036a54d7de88ca27f193c2176e04033', 1, 'SIMPLES'),
+(8, '0008', '8901234567', 4500.00, '68b329da9893e34099c7d8ad5cb9c940', 1, 'SIMPLES'),
+(9, '0009', '9012345678', 5000.00, '5f4dcc3b5aa765d61d8327deb882cf99', 1, 'SIMPLES'),
+(10, '0010', '0123456789', 5500.00, '81dc9bdb52d04dc20036dbd8313ed055', 1, 'SIMPLES')
+GO
+
+--SELECT * FROM TB_CARTAO
+
+INSERT INTO TB_CARTAO (ID_CONTA, NUMERO_CARTAO, CVV, VALIDADE_CARTAO, ATIVO) VALUES
+(1, '1234567812345678', '123', '2026-01-01', 1),
+(2, '2345678923456789', '234', '2026-02-01', 1),
+(3, '3456789034567890', '345', '2026-03-01', 1),
+(4, '4567890145678901', '456', '2026-04-01', 1),
+(5, '5678901256789012', '567', '2026-05-01', 1),
+(6, '6789012367890123', '678', '2026-06-01', 1),
+(7, '7890123478901234', '789', '2026-07-01', 1),
+(8, '8901234589012345', '890', '2026-08-01', 1),
+(9, '9012345690123456', '901', '2026-09-01', 1),
+(10, '9012345690128906', '901', '2026-09-01', 1)
+GO
+
+--SELECT * FROM TB_CHAVE_PIX
+
+INSERT INTO TB_CHAVE_PIX (ID_CONTA, TIPO_CHAVE_PIX, VALOR_CHAVE_PIX, ATIVO) VALUES
+(1, 'CPF', '69228182024', 1),
+(2, 'Email', 'joao.silva@example.com', 1),
+(3, 'Telefone', '21987654321', 1),
+(4, 'CPF', '34567890123', 1),
+(5, 'Email', 'ana.pereira@example.com', 1),
+(6, 'Telefone', '51987654321', 1),
+(7, 'CPF', '67890123456', 1),
+(8, 'Email', 'rafael.almeida@example.com', 1),
+(9, 'Telefone', '81987654321', 1),
+(10, 'CPF', '01234567890', 1)
+GO
+
+--SELECT * FROM TB_MOVIMENTACAO
+
+INSERT INTO TB_MOVIMENTACAO (STATUS_MOVIMENTACAO, ID_CONTA, TIPO_MOVIMENTACAO, DIRECAO, DATA_HORA, DESCRICAO, VALOR_MOVIMENTACAO, VALOR_PERCENTUAL_TAXA, VALOR_TOTAL, CODIGO_MOVIMENTACAO) VALUES
+('SUCESSO', 2, 'Transferencia', 'CREDITO', '2025-01-01 10:00:00', 'Transferencia recebida', 500.00, 0.01, 505.00, NEWID()),
+('SUCESSO', 1, 'Pagamento', 'DEBITO', '2025-01-02 15:00:00', 'Pagamento de conta', 200.00, 0.01, 202.00, NEWID()),
+('SUCESSO', 2, 'Deposito', 'CREDITO', '2025-01-03 09:00:00', 'Deposito em conta', 1000.00, 0.01, 1010.00, NEWID()),
+('SUCESSO', 2, 'Saque', 'DEBITO', '2025-01-04 12:00:00', 'Saque em caixa eletronico', 300.00, 0.01, 303.00, NEWID()),
+('SUCESSO', 3, 'Transferencia', 'CREDITO', '2025-01-05 14:00:00', 'Transferencia recebida', 700.00, 0.01, 707.00, NEWID()),
+('SUCESSO', 3, 'Pagamento', 'DEBITO', '2025-01-06 16:00:00', 'Pagamento de boleto', 150.00, 0.01, 151.50, NEWID()),
+('SUCESSO', 4, 'Deposito', 'CREDITO', '2025-01-07 11:00:00', 'Deposito em conta', 1200.00, 0.01, 1212.00, NEWID()),
+('SUCESSO', 4, 'Saque', 'DEBITO', '2025-01-08 13:00:00', 'Saque em caixa eletronico', 400.00, 0.01, 404.00, NEWID()),
+('SUCESSO', 5, 'Transferencia', 'CREDITO', '2025-01-09 10:00:00', 'Transferencia recebida', 800.00, 0.01, 808.00, NEWID()),
+('SUCESSO', 5, 'Pagamento', 'DEBITO', '2025-01-10 15:00:00', 'Pagamento de conta', 250.00, 0.01, 252.50, NEWID()),
+('SUCESSO', 6, 'Depesito', 'CREDITO', '2025-01-11 09:00:00', 'Deposito em conta', 1500.00, 0.01, 1515.00, NEWID()),
+('SUCESSO', 6, 'Saque', 'DEBITO', '2025-01-12 12:00:00', 'Saque em caixa eletronico', 500.00, 0.01, 505.00, NEWID()),
+('SUCESSO', 7, 'Transferencia', 'CREDITO', '2025-01-13 14:00:00', 'Transferencia recebida', 900.00, 0.01, 909.00, NEWID()),
+('SUCESSO', 7, 'Pagamento', 'DEBITO', '2025-01-14 16:00:00', 'Pagamento de boleto', 300.00, 0.01, 303.00, NEWID()),
+('SUCESSO', 8, 'Deposito', 'CREDITO', '2025-01-15 11:00:00', 'Deposito em conta', 1800.00, 0.01, 1818.00, NEWID()),
+('SUCESSO', 8, 'Saque', 'DEBITO', '2025-01-16 13:00:00', 'Saque em caixa eletronico', 600.00, 0.01, 606.00, NEWID()),
+('SUCESSO', 9, 'Transferencia', 'CREDITO', '2025-01-17 10:00:00', 'Transferencia recebida', 1000.00, 0.01, 1010.00, NEWID()),
+('SUCESSO', 9, 'Pagamento', 'DEBITO', '2025-01-18 15:00:00', 'Pagamento de conta', 350.00, 0.01, 353.50, NEWID()),
+('SUCESSO', 10, 'Deposito', 'CREDITO', '2025-01-19 09:00:00', 'Deposito em conta', 2000.00, 0.01, 2020.00, NEWID()),
+('SUCESSO', 10, 'Saque', 'DEBITO', '2025-01-20 12:00:00', 'Saque em caixa eletronico', 700.00, 0.01, 707.00, NEWID());
+GO
+
+
+-- ADICIONAR DEPOSITO
+INSERT INTO TB_MOVIMENTACAO (
+    STATUS_MOVIMENTACAO, 
+    ID_CONTA, 
+    TIPO_MOVIMENTACAO, 
+    DIRECAO, 
+    DATA_HORA, 
+    DESCRICAO, 
+    VALOR_MOVIMENTACAO, 
+    VALOR_PERCENTUAL_TAXA, 
+    VALOR_TOTAL, 
+    CODIGO_MOVIMENTACAO
+    ) VALUES
+('SUCESSO', 1, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 2, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 3, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 4, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 5, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 6, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 7, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 8, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 9, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID()),
+('SUCESSO', 10, 'Deposito', 'DEBITO', GETDATE(), 'Deposito em caixa eletronico', 2000, 0, 2000, NEWID());
+
+GO
+
+
+
+-- ATUALIZAR SALDO DAS CONTAS
+
+UPDATE TB_CONTA SET TB_CONTA.SALDO = 2000;
+
+GO
+
+
 ALTER DATABASE [DB_FINTECH] 
 SET MULTI_USER;
 
 GO
+
+ 

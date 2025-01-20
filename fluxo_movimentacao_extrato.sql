@@ -68,10 +68,12 @@ INSERT INTO TB_MOVIMENTACAO (
     VALOR_TOTAL, 
     CODIGO_MOVIMENTACAO
     ) VALUES
-('PENDENTE', 1, 'Pix', 'CREDITO', GETDATE(), 'Transferencia pix - barzin sexta', 50, 0, 50, 'bb217d4a-01a8-43a7-8507-fc9b07f0d3a9'),
-('PENDENTE', 2, 'Pix', 'DEBITO', GETDATE(), 'Transferencia pix - barzin sexta', 50, 0, 50, 'bb217d4a-01a8-43a7-8507-fc9b07f0d3a9');
+('PENDENTE', 11, 'Pix', 'CREDITO', GETDATE(), 'Transferencia pix - barzin sexta', 50, 0, 50, 'bb217d4a-01a8-43a7-8507-fc9b07f0d3a9'),
+('PENDENTE', 12, 'Pix', 'DEBITO', GETDATE(), 'Transferencia pix - barzin sexta', 50, 0, 50, 'bb217d4a-01a8-43a7-8507-fc9b07f0d3a9');
 
 GO
+
+SELECT * FROM TB_CONTA
 
 UPDATE TB_CONTA SET SALDO = SALDO - 50 WHERE ID = 1;
 GO
